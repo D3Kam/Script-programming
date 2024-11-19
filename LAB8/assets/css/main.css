@@ -44,7 +44,7 @@
   --surface-color: #343434;
 }
 
-.dark-background {
+[data-theme="dark"]{
   --background-color: rgba(15, 15, 15, 0.975);
   --default-color: #ffffff;
   --heading-color: #ffffff;
@@ -57,6 +57,24 @@
   scroll-behavior: smooth;
 }
 
+/* Light Theme */
+[data-theme="light"] {
+  --background-color: #ffffff;
+  --default-color: #000000;
+  --heading-color: #1a1a1a;
+  --accent-color: #18d26e;
+  --surface-color: #f4f4f4;
+  --contrast-color: #ffffff;
+
+  --nav-color: #797979;
+  --nav-hover-color:#18d26e;
+  --nav-mobile-background-color: #f9f9f9;
+  --nav-dropdown-background-color: #ffffff;
+  --nav-dropdown-color: #000000;
+  --nav-dropdown-hover-color: #18d26e;
+}
+
+
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
 --------------------------------------------------------------*/
@@ -64,13 +82,17 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  transition: background-color 0.5s, color 0.5s;
 }
 
-a {
-  color: var(--accent-color);
-  text-decoration: none;
-  transition: 0.3s;
+
+
+.scroll-top,
+.header,
+.footer {
+  transition: background-color 0.5s, color 0.5s;
 }
+
 
 a:hover {
   color: color-mix(in srgb, var(--accent-color), transparent 25%);
@@ -86,7 +108,10 @@ h6 {
   color: var(--heading-color);
   font-family: var(--heading-font);
 }
-
+a,
+h1, h2, h3, h4, h5, h6 {
+  transition: color 0.5s;
+}
 /* PHP Email Form Messages
 ------------------------------*/
 .php-email-form .error-message {
@@ -697,8 +722,10 @@ section,
 .hero img {
   position: absolute;
   inset: 0;
-  display: block;
-  width: 100%;
+  display:flexbox;
+  justify-content: right;
+  align-items: end;
+  width: auto;
   height: 100%;
   object-fit: cover;
   z-index: 1;
@@ -756,6 +783,24 @@ section,
     font-size: 20px;
   }
 }
+
+.hero {
+  display: flex; /* Flexbox for alignment */
+  align-items: center; /* Vertically center contents */
+  justify-content: space-between; /* Push content apart (text left, image right) */
+  height: 95vh; /* Full viewport height */
+  padding: 0 20px; /* Optional: adds spacing on the sides */
+}
+
+.image-container {
+  flex: 0 0 auto; /* Prevents the image from shrinking or growing */
+}
+
+.image-container img {
+  max-width: 100%; /* Ensures the image scales within its container */
+  height: auto; /* Maintains aspect ratio */
+}
+
 
 /*--------------------------------------------------------------
 # About Section
@@ -1473,4 +1518,12 @@ section,
 
 .contact .php-email-form button[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
+}
+
+.mode-btn{
+  background-color: #18d26e;
+  border: 0px;
+  border-radius: 10px; /* Makes the corners more rounded */
+  padding: 10px 20px; /* Optional: Adjusts size and spacing */
+  cursor: pointer; /* Adds a pointer cursor on hover */
 }
